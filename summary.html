@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Summary</title>
+    <link rel="stylesheet" href="./assets/css/base.css" />
+  </head>
+  <body>
+    <div class="mobile-frame">
+      <div class="" id="page-main-5">
+        <header>
+          <span class="pill" id="remain-pill">Remain Photos: 0</span>
+          <span class="pill" id="mode-pill">Mode: Smart</span>
+        </header>
+        <main style="align-items:stretch;">
+          <!-- <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
+            <h1 style="font-size:24px;">Curated set</h1>
+            <button class="button outline" id="replay-btn" style="width:auto;padding:10px 14px;font-size:13px;">Restart</button>
+          </div> -->
+          <div class="grid three" id="summary-grid"></div>
+        </main>
+
+        <div class="modal-backdrop" id="method-modal">
+          <div class="modal">
+            <h2>Choose type</h2>
+            <p style="font-size:14px;margin-bottom:18px;color:var(--text-muted);">Pick your final rating workflow.</p>
+            <div class="method-buttons">
+              <button data-method="smart">SMART</button>
+              <button data-method="pairwise">Pairwise</button>
+              <button data-method="manual">Manual</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./assets/js/summary.js"></script>
+  </body>
+</html>

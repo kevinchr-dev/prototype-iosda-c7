@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Swipe Photos</title>
+    <link rel="stylesheet" href="./assets/css/base.css" />
+  </head>
+  <body>
+    <div class="mobile-frame">
+      <div class="screen" id="page-main-3">
+        <header>
+          <span class="pill" id="count-pill">0 / 0</span>
+          <span class="pill" id="yes-pill">Yes: 0</span>
+          <span class="pill" id="no-pill">No: 0</span>
+        </header>
+        <main>
+          <h1>Swipe</h1>
+          <div class="photo-stack" id="photo-stack"></div>
+          <div class="photo-meta" id="photo-name">—</div>
+          <div class="swipe-actions">
+            <button class="action-btn negative" id="reject-btn">✕</button>
+            <button class="action-btn positive" id="accept-btn">✓</button>
+          </div>
+        </main>
+
+        <div class="modal-backdrop" id="result-modal">
+          <div class="modal">
+            <h2 style="margin-bottom:8px;">Swipe complete</h2>
+            <p id="result-summary" style="font-size:14px;color:var(--text-muted);"></p>
+            <div class="list" id="duplicate-list"></div>
+            <button class="button primary" id="proceed-btn" style="margin-top:18px;">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./assets/js/swipe.js"></script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug Storage</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 20px;
+      background: #1a1a1a;
+      color: #00ff00;
+    }
+    pre {
+      background: #000;
+      padding: 15px;
+      border: 1px solid #00ff00;
+      overflow: auto;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Storage Debugger</h1>
+  <button onclick="showStorage()">Show Storage</button>
+  <button onclick="clearStorage()">Clear Storage</button>
+  <button onclick="location.reload()">Reload</button>
+  <pre id="output"></pre>
+  
+  <script>
+    const output = document.getElementById('output');
+    
+    function showStorage() {
+      const raw = localStorage.getItem('photoFlowState');
+      if (!raw) {
+        output.textContent = 'No storage found';
+        return;
+      }
+      
+      try {
+        const state = JSON.parse(raw);
+        output.textContent = JSON.stringify(state, null, 2);
+      } catch (err) {
+        output.textContent = 'Parse error: ' + err.message;
+      }
+    }
+    
+    function clearStorage() {
+      localStorage.removeItem('photoFlowState');
+      output.textContent = 'Storage cleared';
+    }
+    
+    // Auto show on load
+    showStorage();
+  </script>
+</body>
+</html>

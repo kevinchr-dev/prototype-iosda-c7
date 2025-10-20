@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Pairwise Compare</title>
+    <link rel="stylesheet" href="./assets/css/base.css" />
+  </head>
+  <body>
+    <div class="mobile-frame">
+      <div class="screen" id="page-main-4">
+        <header>
+          <span class="pill" id="group-pill">Group 1 / 1</span>
+          <span class="pill" id="round-pill">Round 1 / 1</span>
+        </header>
+        <div class="pair-stage">
+          <h1 style="font-size:24px;margin-bottom:12px;">Choose one</h1>
+          <p style="font-size:14px;color:var(--text-muted);text-align:center;max-width:280px;">We found some photos that might be similar. Pick the best one to keep.</p>
+          <div class="pair-options" id="pair-options">
+            <div class="pair-card" data-choice="left">
+              <img id="left-img" src="" alt="Left option" style="background: #333;" />
+              <div class="pair-filename" id="left-name">—</div>
+            </div>
+            <div class="pair-card" data-choice="right">
+              <img id="right-img" src="" alt="Right option" style="background: #333;" />
+              <div class="pair-filename" id="right-name">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./assets/js/pairwise.js"></script>
+  </body>
+</html>

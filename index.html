@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Photo Triage Prototype</title>
+    <link rel="stylesheet" href="./assets/css/base.css" />
+  </head>
+  <body>
+    <div class="mobile-frame">
+      <div class="screen" id="page-main-1">
+        <header>
+          <span class="pill">Prototype</span>
+          <span class="pill">Beta 0.1</span>
+        </header>
+        <main>
+          <h1>Insert Google Drive link</h1>
+          <p>Paste your shared album link and we will start preparing your photos.</p>
+          <div class="input-card">
+            <label for="drive-link">Drive link</label>
+            <input id="drive-link" type="url" placeholder="https://drive.google.com/..." />
+            <button class="button primary" id="start-btn">Start</button>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script type="module" src="./assets/js/index.js"></script>
+  </body>
+</html>

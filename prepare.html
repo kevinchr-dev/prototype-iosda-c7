@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Preparing Photos</title>
+    <link rel="stylesheet" href="./assets/css/base.css" />
+  </head>
+  <body>
+    <div class="mobile-frame">
+      <div class="screen" id="page-main-2">
+        <header>
+          <span class="pill">Syncing</span>
+          <span class="pill" id="target-pill">Target: –</span>
+        </header>
+        <main>
+          <div class="status-ring">
+            <span style="font-size:22px;color:var(--primary);font-weight:600;">↻</span>
+          </div>
+          <h1>Preparing your photos</h1>
+          <p style="max-width:260px;text-align:center;">We are fetching metadata, removing obvious duplicates, and estimating quality scores.</p>
+        </main>
+
+        <div class="modal-backdrop" id="target-modal">
+          <div class="modal">
+            <h2 style="margin-bottom:12px;">Input your target</h2>
+            <p style="font-size:14px;">How many photos do you want to keep?</p>
+            <input id="target-input" type="number" placeholder="e.g. 20" style="margin:18px 0;padding:16px 18px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,0.05);color:var(--text);" min="1" max="999" />
+            <button class="button primary" id="target-submit">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./assets/js/prepare.js"></script>
+  </body>
+</html>
