@@ -2,35 +2,212 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Summary</title>
     <link rel="stylesheet" href="./assets/css/base.css" />
+    <style>
+      /* --- CSS SCROLL (TIDAK BERUBAH) --- */
+      .screen {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .screen main {
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 90px;
+      }
+
+      /* --- CSS FAB & SELECTABLE CARD (TIDAK BERUBAH) --- */
+      .fab {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+        width: 60px;
+        height: 60px;
+        background-color: var(--primary);
+        color: white;
+        border-radius: 18px;
+        border: none;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+        cursor: pointer;
+        z-index: 1000;
+        transition: transform 0.2s ease-out;
+      }
+      .fab.visible {
+        display: flex;
+      }
+      .fab:active {
+        transform: scale(0.95);
+      }
+      .fab-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #ff3b30;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        min-width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--background);
+      }
+      .selectable-card {
+        position: relative;
+        cursor: pointer;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 2px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .selectable-card.selected {
+        border-color: var(--primary);
+      }
+      .selectable-card::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 24px;
+        height: 24px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 2px solid var(--border);
+        border-radius: 50%;
+        transform: scale(0);
+        transition: transform 0.2s;
+      }
+      .selectable-card.selected::after {
+        transform: scale(1);
+        background-color: var(--primary);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+        border-color: white;
+      }
+      .selectable-card img {
+        display: block;
+        width: 100%;
+      }
+
+      /* --- STYLE MODAL (DENGAN PERBAIKAN) --- */
+      .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        transition: opacity 0.3s ease;
+      }
+      .modal-backdrop.visible {
+        display: flex;
+      }
+
+      /* [ INI BAGIAN YANG DITAMBAHKAN ] */
+      .modal {
+        background: var(--background, #111);
+        padding: 24px;
+        border-radius: 24px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transform: scale(0.95);
+        transition: transform 0.3s ease;
+        opacity: 0;
+      }
+      /* Efek animasi saat modal muncul */
+      .modal-backdrop.visible .modal {
+        transform: scale(1);
+        opacity: 1;
+      }
+      /* [ AKHIR BAGIAN YANG DITAMBAHKAN ] */
+
+      #modal-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 16px;
+        max-height: 50vh;
+        overflow-y: auto;
+      }
+      #modal-grid img {
+        width: 100%;
+        border-radius: 12px;
+      }
+      .comment-box {
+        width: 100%;
+        margin-top: 16px;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text);
+        font-size: 15px;
+        min-height: 80px;
+        resize: vertical;
+      }
+    </style>
   </head>
   <body>
     <div class="mobile-frame">
-      <div class="" id="page-main-5">
+      <div class="screen" id="page-main-5">
         <header>
           <span class="pill" id="remain-pill">Remain Photos: 0</span>
           <span class="pill" id="mode-pill">Mode: Smart</span>
         </header>
-        <main style="align-items:stretch;">
-          <!-- <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-            <h1 style="font-size:24px;">Curated set</h1>
-            <button class="button outline" id="replay-btn" style="width:auto;padding:10px 14px;font-size:13px;">Restart</button>
-          </div> -->
+        <main>
+          <h1 style="font-size: 28px; padding: 0 12px 12px">Select Photos</h1>
           <div class="grid three" id="summary-grid"></div>
         </main>
 
-        <div class="modal-backdrop" id="method-modal">
-          <div class="modal">
-            <h2>Choose type</h2>
-            <p style="font-size:14px;margin-bottom:18px;color:var(--text-muted);">Pick your final rating workflow.</p>
-            <div class="method-buttons">
-              <button data-method="smart">SMART</button>
-              <button data-method="pairwise">Pairwise</button>
-              <button data-method="manual">Manual</button>
-            </div>
-          </div>
+        <button class="fab" id="show-selection-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span class="fab-badge" id="selection-count">0</span>
+        </button>
+      </div>
+
+      <div class="modal-backdrop" id="selection-modal">
+        <div class="modal">
+          <h2 id="modal-title">Selected Photos: 0/20</h2>
+          <div id="modal-grid"></div>
+          <textarea
+            class="comment-box"
+            placeholder="Bisa comment..."
+          ></textarea>
+          <button
+            class="button primary"
+            id="close-modal-btn"
+            style="margin-top: 18px"
+          >
+            Done
+          </button>
         </div>
       </div>
     </div>
