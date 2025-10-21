@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>SMART Grading</title>
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <style>
+      main.smart-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+        padding: 16px 0 12px;
+      }
+
+      .smart-gallery {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-top: 72%;
+        margin: 8px 0 6px;
+      }
+
+      .smart-card {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        aspect-ratio: 3/4;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #2a2a2a;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .smart-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .smart-card.current {
+        left: 50%;
+        width: 62%;
+        max-width: 280px;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+      }
+
+      .smart-card.prev {
+        left: 6%;
+        width: 38%;
+        max-width: 170px;
+        opacity: 0.35;
+        filter: blur(1.5px);
+        z-index: 2;
+      }
+
+      .smart-card.next {
+        right: 6%;
+        width: 38%;
+        max-width: 170px;
+        opacity: 0.35;
+        filter: blur(1.5px);
+        z-index: 2;
+      }
+
+      .hidden {
+        visibility: hidden;
+      }
+
+      .smart-question {
+        font-size: 15px;
+        line-height: 1.4;
+        color: var(--text-muted);
+        max-width: 320px;
+        margin: 10px auto;
+      }
+
+      /* Four buttons - uniform height and width */
+      .rating-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: nowrap;
+        margin-top: 6px;
+      }
+
+      .rating-row .button {
+        flex: 1;
+        min-width: 70px;
+        max-width: 90px;
+        height: 40px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0;
+      }
+
+      .smart-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #b9b9b9;
+      }
+
+      .dot-active {
+        background: var(--text-color);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="mobile-frame">
+      <div class="screen" id="page-smart">
+        <header>
+          <span class="pill">SMART</span>
+          <span class="pill" id="progress-pill">0 / 0</span>
+        </header>
+
+        <main class="smart-main">
+          <h1>Answer the question</h1>
+
+          <!-- Gallery -->
+          <div class="smart-gallery">
+            <div class="smart-card prev" id="card-prev"><img id="img-prev" alt="Previous photo" /></div>
+            <div class="smart-card current" id="card-current"><img id="img-current" alt="Current photo" /></div>
+            <div class="smart-card next" id="card-next"><img id="img-next" alt="Next photo" /></div>
+          </div>
+
+          <p id="smart-question" class="smart-question">
+            Apakah momennya bagus, subjeknya menarik, dan nuansanya pas?
+          </p>
+
+          <div class="rating-row" id="rating-row">
+            <button class="button" data-score="1">Buruk</button>
+            <button class="button" data-score="2">Kurang Baik</button>
+            <button class="button" data-score="3">Baik</button>
+            <button class="button" data-score="4">Sangat Baik</button>
+          </div>
+
+          <div class="smart-dots">
+            <span class="dot dot-active" id="dot-1"></span>
+            <span class="dot" id="dot-2"></span>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="./assets/js/smart.js"></script>
+  </body>
+</html>
